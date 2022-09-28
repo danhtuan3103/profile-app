@@ -19,6 +19,20 @@ app.use((req, res, next) => {
     next();
 });
 
+const normalizePort = (val) => {
+    const port = parseInt(val, 10);
+  
+    if (isNaN(port)) {
+      return val;
+    }
+    if (port >= 0) {
+      return port;
+    }
+    return false;
+  };
+
+  const port = normalizePort(process.env.PORT || "4000");
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -52,4 +66,4 @@ app.post("/", (request, response, next) => {
 })
 
 
-app.listen( 4000 ,() => {console.log("listening on port 4000")})
+app.listen( port ,() => {console.log("listening on port 4000")})
